@@ -7,5 +7,5 @@ workflows:
     example-workflow:
       jobs:
         - node/run:
-            app-dir: dist/my-app
+            app-dir: ~/project/my-app
              pkg-manager:npm
