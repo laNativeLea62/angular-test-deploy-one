@@ -7,5 +7,5 @@ workflows:
     example-workflow:
       jobs:
         - node/run:
-            app-dir: ~/project/my-app
+             app-dir:angular-test-deploy-one\my-app\
              pkg-manager:npm
