@@ -1,27 +1,18 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@4.1.0 # Use the Node.js orb (a set of pre-packaged CircleCI configurations)
+  node: circleci/node@5.1.0 # Use the Node.js orb (a set of pre-packaged CircleCI configurations)
 
 jobs:
   build:
     executor:
       name: node/default
-
     steps:
       - checkout # Checkout the code from the repository
-
-      # Cache dependencies for faster builds
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-
-      # Install dependencies
+     # Install dependencies
       - run:
           name: Install Dependencies
           command: npm install
-
       # Cache the dependencies
       - save_cache:
           paths:
