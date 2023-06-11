@@ -3,29 +3,9 @@ version: 2.1
 orbs:
   node: circleci/node@5.1.0 # Use the Node.js orb (a set of pre-packaged CircleCI configurations)
 
-jobs:
-  build:
-    executor:
-      name: node/default
-    steps:
-      - checkout # Checkout the code from the repository
-     # Install dependencies
-      - run:
-          name: Install Dependencies
-          command: npm install
-      # Cache the dependencies
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      # Build the application
-      - run:
-          name: Build Application
-          command: npm run build --prod
-
 workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
+    example-workflow:
+      jobs:
+        - node/run:
+            app-dir: my-app
+             pkg-manager:npm
