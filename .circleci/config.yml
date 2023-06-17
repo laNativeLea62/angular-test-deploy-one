@@ -1,23 +1,44 @@
+# Javascript Node CircleCI 2.1 configuration file
+#
+# Check https://circleci.com/docs/2.1/language-javascript/ for more details
+#
 version: 2.1
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:18.15.0
 
-orbs:
-  node: circleci/node@5.1.0 # Use the Node.js orb (a set of pre-packaged CircleCI configurations)
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
 
-workflows:
-    example-workflow:
-     jobs:
-  build_and_test: # this can be any name you choose
-    executor: node/default # use the default executor defined within the orb
+    working_directory: ~/repo
+
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run:
-          command: npm run test
-          name: Run tests
-      - run:
-          command: npm run build
-          name: Build app
-      - persist_to_workspace:
-          root: ~/project
-          paths:.
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: npm run build --prod --no-progress
+      - run: npm run test --sr --no-progress
+      - deploy:
+          command: |
+            sh scripts/publish.sh
+
+
+
+
