@@ -7,8 +7,10 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:18.15.0
-
+      - image: cimg/node:20.3.0 
+        auth:
+          username: mleanewdev62
+          password: DOCKERHUB_PASSWORD  # context / project UI env-var reference 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
