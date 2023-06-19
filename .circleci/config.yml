@@ -22,12 +22,15 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+
       - run:
           name: Set CHROME_BIN environment variable
           command: echo "export CHROME_BIN=/usr/bin/google-chrome" >> $BASH_ENV
+
       - run:
           name: Build
           command: npm run build
+
       - run:
           name: Run tests
           command: npm run test
