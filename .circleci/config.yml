@@ -10,8 +10,10 @@ jobs:
   build:
     executor: node-executor
     steps:
-      - checkout
       - browser-tools/install-browser-tools
+         
+      - checkout
+
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
@@ -24,9 +26,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run:
-          name: Install CHROME
-          browser-tools:
+
       - run:
           name: Set CHROME_BIN environment variable
           command: echo "export CHROME_BIN=/usr/bin/google-chrome" >> $BASH_ENV
