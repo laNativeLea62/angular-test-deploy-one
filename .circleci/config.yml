@@ -4,7 +4,7 @@ orbs:
 executors:
   node-executor:
     docker:
-      - image: circleci/node:erbium-bullseye-browsers-legacy
+      - image: cimg/node:16.13.2 
 
 jobs:
   build:
