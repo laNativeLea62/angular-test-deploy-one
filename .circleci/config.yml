@@ -9,8 +9,10 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: cimg/node:13.12-browsers  
-      
+      - image: circleci/node:erbium-bullseye-browsers-legacy  
+        auth:
+          username: mleanewdev62
+          password: DOCKERHUB_PASSWORD
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
