@@ -34,10 +34,12 @@ jobs:
               sudo apt-get update
               sudo apt-get install google-chrome-stable
       - run:
-         name: Set CHROME_BIN and DBUS_SESSION_BUS_ADDRESS environment variables 
+         name: Set CHROME_BIN and DBUS_SESSION_BUS_ADDRESS  environment variables 
          command:  |
             echo "export CHROME_BIN=/usr/bin/google-chrome" >> $BASH_ENV
             echo "export DBUS_SESSION_BUS_ADDRESS=/dev/null" >> $BASH_ENV
+            export XDG_RUNTIME_DIR="/run/user/$UID" >> $BASH_ENV
+            export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus" >> $BASH_ENV
       - run:
          name: Build
          command: npm run build
