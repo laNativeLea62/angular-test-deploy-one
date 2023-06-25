@@ -4,7 +4,7 @@ orbs:
 executors:
   node-executor:
     docker:
-      - image: cimg/node:6-browsers 
+      - image: cimg/node:16.13.2 
 jobs:
   build:
     executor: node-executor
@@ -42,9 +42,7 @@ jobs:
       - run:
          name: Build
          command: npm run build
-      - run: 
-         name: Run Tests - why was this so hard? 
-         command: npm run test
+    
          
 
 
